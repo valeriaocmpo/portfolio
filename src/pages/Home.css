@@ -292,18 +292,14 @@
   gap: 1.25rem;
 }
 
-.home-work__grid > *:nth-child(1) {
-  grid-column: span 7;
-}
-.home-work__grid > *:nth-child(2) {
-  grid-column: span 5;
-}
-.home-work__grid > *:nth-child(3) {
-  grid-column: span 5;
-}
-.home-work__grid > *:nth-child(4) {
-  grid-column: span 7;
-}
+/* Repeating 7/5 then 5/7 rows, for any number of projects */
+.home-work__grid > *:nth-child(4n + 1),
+.home-work__grid > *:nth-child(4n + 4) { grid-column: span 7; }
+.home-work__grid > *:nth-child(4n + 2),
+.home-work__grid > *:nth-child(4n + 3) { grid-column: span 5; }
+
+/* A card left alone on the last row fills the row */
+.home-work__grid > *:last-child:nth-child(odd) { grid-column: span 12; }
 
 @media (max-width: 860px) {
   .home-work__grid > * {

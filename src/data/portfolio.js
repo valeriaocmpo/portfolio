@@ -4,6 +4,59 @@
 
 export const projects = [
   {
+    id: "casamexico",
+    tag: "Casa Mexico",
+    title: "Casa Mexico",
+    subtitle: "Website Redesign",
+    shortDesc:
+      "A redesign of the website for Casa Mexico, a family-run Mexican restaurant with three locations in Ottawa. I rebuilt the site around what diners actually come for: the menu, the hours and a fast way to order.",
+    image: "/img/CM_home.png",
+    imageFallbackLabel: "Casa Mexico redesigned home page with the location picker",
+    overview:
+      "Casa Mexico runs three restaurants across Ottawa, and each one has its own menu, prices and hours. The original website didn't make that easy to navigate. Diners had to pick a branch before seeing anything useful, and the information they came for (what's on the menu, when it's open, how to order) was buried below large photos and promotions.\n\nI wanted a site that answers those questions within seconds, on a phone, for whichever Casa is closest to you.",
+    role: "I owned this project end to end as the sole designer: user interviews, an audit of the existing site, low-fidelity testing, visual design and building the final site in HTML, CSS and JavaScript.",
+    sections: [
+      {
+        heading: "User Interviews",
+        body: "I interviewed 4 Ottawa residents who eat out or order takeout regularly. Their answers were remarkably consistent:\n\n• All 4 look restaurants up on their phone, and all 4 go looking for the menu first. Half also need the opening hours.\n• 3 of 4 plan meals around dietary needs, and one told me they gave up on a restaurant and ordered elsewhere because the menu had no dietary filters.\n• Ordering habits split evenly: half pick up takeout, usually by calling the restaurant, and half order through delivery apps.\n• Their biggest frustrations were hours, locations and contact details that were hard to find, and no clear way to make a reservation.",
+      },
+      {
+        heading: "A Look at the Original Site",
+        body: "The original site leads with a full-screen photo and a slogan, and the locations section asks visitors to choose a branch before they can see a menu. Hours, phone numbers and ordering options sit deeper in each page.\n\nThe content was all there, but it was arranged around the brand instead of around the tasks people came to complete.",
+        images: [
+          { src: "/img/CM_original_home.jpg", alt: "Original Casa Mexico home page with a full-screen photo hero" },
+          { src: "/img/CM_original_locations.jpg", alt: "Original Casa Mexico locations section with three photo cards" },
+        ],
+      },
+      {
+        heading: "Low-Fidelity Testing",
+        body: "I tested low-fidelity wireframes before moving to visual design. The feedback was direct:\n\n• Choosing a branch up front took so long that one participant said they wanted to leave the site.\n• An \"All locations\" button made people think there were more than three Casas.\n• The delivery options were too far down the page, so participants had to scroll to find them.\n• The call button on the menu page was too far down too.\n\nEvery one of these pointed to the same fix: stop making people work before they get value, and put the actions they came for at the top.",
+      },
+      {
+        heading: "The Redesign",
+        subSections: [
+          {
+            name: "Choose your Casa, once",
+            body: "Instead of blocking the page, a location picker on the home page shows all three Casas with today's hours at a glance. The choice is remembered on every page, so the menu, prices, hours and call button always follow your Casa. Taco Tuesday moved into a slim banner at the top, where it no longer competes with the menu.",
+            images: [{ src: "/img/CM_home.png", alt: "Redesigned home page with the Choose your Casa picker" }],
+          },
+          {
+            name: "A menu built for ordering",
+            body: "The menu opens with today's hours and three ways to order: call for pickup, Uber Eats or SkipTheDishes. Dishes are grouped into tabs, tagged as Vegan, Vegetarian or Spicy, and a dietary filter narrows the list in one tap. This answers the frustration I heard most often in interviews.",
+            images: [{ src: "/img/CM_menu.png", alt: "Redesigned menu page with order buttons, category tabs and a dietary filter" }],
+          },
+          {
+            name: "Locations and hours",
+            body: "Each Casa gets a card with its address, whether it's open today, its full weekly hours and a phone number to order pickup or book a table. Reservations happen by phone, so the site now says that clearly instead of leaving people to guess.",
+            images: [{ src: "/img/CM_locations.png", alt: "Redesigned locations page with hours and phone numbers for each Casa" }],
+          },
+        ],
+      },
+    ],
+    conclusion:
+      "This project reminded me how much a site's structure decides its usability. Most of the original content was fine; it was simply in the wrong order for the people using it. Talking to diners and testing early made the priorities obvious: menu, hours and ordering come first.\n\nNext, I'd run usability tests on the final design with the same tasks, such as finding today's hours or a vegetarian dish, to measure how much faster they've become. I'd also explore online reservations, since a phone call is currently the only way to book a table.",
+  },
+  {
     id: "algonquingo",
     featured: true,
     tag: "Algonquin College",

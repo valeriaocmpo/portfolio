@@ -149,3 +149,20 @@
   box-shadow: 0 2px 8px rgba(107, 71, 200, 0.12);
   letter-spacing: 0.02em;
 }
+/* Wide card: a project left alone on the last grid row
+   lays out side by side instead of stretching tall. */
+@media (min-width: 861px) {
+  .work-page__grid > .project-card:last-child:nth-child(odd),
+  .home-work__grid > .project-card:last-child:nth-child(odd) {
+    flex-direction: row;
+  }
+  .work-page__grid > .project-card:last-child:nth-child(odd) .project-card__thumb,
+  .home-work__grid > .project-card:last-child:nth-child(odd) .project-card__thumb {
+    width: 58%;
+  }
+  .work-page__grid > .project-card:last-child:nth-child(odd) .project-card__body,
+  .home-work__grid > .project-card:last-child:nth-child(odd) .project-card__body {
+    justify-content: center;
+    padding: 2rem 2.5rem;
+  }
+}

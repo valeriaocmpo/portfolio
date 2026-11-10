@@ -37,7 +37,9 @@ function CaseBody({ project }) {
               ? "A web portal for the security team"
               : project.id === "mentora"
                 ? "A two-sided app for students and tutors"
-                : "A platform designed for book lovers"}
+                : project.id === "casamexico"
+                  ? "A restaurant website built around what diners look for"
+                  : "A platform designed for book lovers"}
         </h2>
         <p className="case__overview-body">{project.overview}</p>
 
@@ -60,6 +62,14 @@ function CaseBody({ project }) {
           <h2 className="case__section-heading">{sec.heading}</h2>
 
           {sec.body && <p className="case__section-body">{sec.body}</p>}
+
+          {sec.images && (
+            <div className="case__img-row case__img-row--3">
+              {sec.images.map((img, idx) => (
+                <img key={idx} src={img.src} alt={img.alt} />
+              ))}
+            </div>
+          )}
 
           {/* Sub-sections (e.g. Wayfinder / Reports / Events) */}
           {sec.subSections &&
