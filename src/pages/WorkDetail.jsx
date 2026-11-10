@@ -3,7 +3,7 @@ import { useScrollReveal } from "../hooks";
 import { projects } from "../data/portfolio";
 import ContactCTA from "../components/ContactCTA";
 import "./WorkDetail.css";
-
+import CaseNav from "../components/CaseNav";
 // ── Figma embed ────────────────────────────────────────────────────
 function FigmaEmbed({ url }) {
   if (!url) return null;
@@ -377,6 +377,9 @@ export default function WorkDetail() {
           <span>{project.subtitle}</span>
         </h1>
       </header>
+
+      {/* ── Sticky section nav ── */}
+      <CaseNav sections={project.sections} />
 
       {/* ── Cover: Figma embed if available, else image ── */}
 {project.figmaEmbed ? (
