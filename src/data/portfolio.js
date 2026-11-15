@@ -8,6 +8,7 @@ export const projects = [
     tag: "Casa Mexico",
     title: "Casa Mexico",
     subtitle: "Website Redesign",
+    liveSite: "https://casa-mexico-website.vercel.app/",
     shortDesc:
       "A redesign of the website for Casa Mexico, a family-run Mexican restaurant with three locations in Ottawa. I rebuilt the site around what diners actually come for: the menu, the hours and a fast way to order.",
     image: "/img/CM_home.png",

@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { useScrollReveal } from "../hooks";
 import { projects } from "../data/portfolio";
 import ContactCTA from "../components/ContactCTA";
@@ -15,6 +16,50 @@ function FigmaEmbed({ url }) {
         allowFullScreen
         loading="lazy"
         className="case__figma-iframe"
+      />
+    </div>
+  );
+}
+
+// ── Live website embed ───────────────────────────────────────────
+// Loads the site at a desktop width and scales it down to fit, so the
+// embedded site shows its desktop layout (full nav bar) instead of its
+// tablet layout. On small screens it renders at native size.
+const LIVE_DESKTOP_WIDTH = 1280;
+const LIVE_MIN_SCALED_WIDTH = 700;
+
+function LiveEmbed({ url, title }) {
+  const frameRef = useRef(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      const w = entry.contentRect.width;
+      setScale(w >= LIVE_MIN_SCALED_WIDTH ? Math.min(1, w / LIVE_DESKTOP_WIDTH) : 1);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const scaled = scale < 1;
+
+  return (
+    <div className="case__figma-iframe case__live-frame" ref={frameRef}>
+      <iframe
+        src={url}
+        title={title}
+        loading="lazy"
+        style={
+          scaled
+            ? {
+                width: `${LIVE_DESKTOP_WIDTH}px`,
+                height: `${100 / scale}%`,
+                transform: `scale(${scale})`,
+              }
+            : undefined
+        }
       />
     </div>
   );
@@ -392,7 +437,25 @@ export default function WorkDetail() {
       <CaseNav sections={project.sections} />
 
       {/* ── Cover: Figma embed if available, else image ── */}
-{project.figmaEmbed ? (
+{project.liveSite ? (
+  <div className="case__figma case__live reveal">
+    <div className="case__live-head">
+      <p className="case__section-heading">Live Website</p>
+      <a
+        href={project.liveSite}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="case__live-link"
+      >
+        Open in a new tab ↗
+      </a>
+    </div>
+    <LiveEmbed
+      url={project.liveSite}
+      title={`${project.title} live website`}
+    />
+  </div>
+) : project.figmaEmbed ? (
   <div className="case__figma reveal">
     <p className="case__section-heading">Interactive Prototype</p>
     <iframe
