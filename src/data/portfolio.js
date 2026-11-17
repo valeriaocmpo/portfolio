@@ -12,26 +12,118 @@ export const projects = [
     shortDesc:
       "A redesign of the website for Casa Mexico, a family-run Mexican restaurant with three locations in Ottawa. I rebuilt the site around what diners actually come for: the menu, the hours and a fast way to order.",
     image: "/img/CM_home.png",
-    imageFallbackLabel: "Casa Mexico redesigned home page with the location picker",
+    imageFallbackLabel:
+      "Casa Mexico redesigned home page with the location picker",
     overview:
       "Casa Mexico runs three restaurants across Ottawa, and each one has its own menu, prices and hours. The original website didn't make that easy to navigate. Diners had to pick a branch before seeing anything useful, and the information they came for (what's on the menu, when it's open, how to order) was buried below large photos and promotions.\n\nI wanted a site that answers those questions within seconds, on a phone, for whichever Casa is closest to you.",
     role: "I owned this project end to end as the sole designer: user interviews, an audit of the existing site, low-fidelity testing, visual design and building the final site in HTML, CSS and JavaScript.",
     sections: [
       {
-        heading: "User Interviews",
-        body: "I interviewed 4 Ottawa residents who eat out or order takeout regularly. Their answers were remarkably consistent:\n\n• All 4 look restaurants up on their phone, and all 4 go looking for the menu first. Half also need the opening hours.\n• 3 of 4 plan meals around dietary needs, and one told me they gave up on a restaurant and ordered elsewhere because the menu had no dietary filters.\n• Ordering habits split evenly: half pick up takeout, usually by calling the restaurant, and half order through delivery apps.\n• Their biggest frustrations were hours, locations and contact details that were hard to find, and no clear way to make a reservation.",
+        heading: "Original site audit",
+        body: "Before designing anything, I audited the current site page by page manually and with the help of Claude. I found several issues that were degrading the UX and making the site not visually appealing.",
+
+        subSections: [
+          {
+            name: "Low contrast",
+            body: 'This is a recurrent issue accross the whole site, take these cards as an example. Small labels like "Explore menu" are 13px light grey text on top of photos, which makes the main path into each menu easy to miss.',
+            images: [
+              {
+                src: "/img/CM_issue_contrast.jpg",
+                alt: "Original Our Locations section: red heading on black and small grey Explore menu labels on photos",
+              },
+            ],
+          },
+          {
+            name: "Headers take up too much space",
+            body: "Every page opens with the same full-width photo banner and a giant title. On the About page, the actual story doesn't start until you're a full screen down, after both the banner and a second oversized \"Discover our journey\" heading.",
+            images: [
+              {
+                src: "/img/CM_issue_header.jpg",
+                alt: "Original About page: full-width photo banner and oversized heading push the content below the fold",
+              },
+            ],
+          },
+          {
+            name: "Takeout loses your selected branch",
+            body: 'When you tap "Takeout" on a specific location, you\'d expect to order from that Casa. Instead, the site sends you to a page listing the contact info for all three locations again, so you have to find the one you already chose. It undoes your decision and leaves you wondering whether you clicked the right thing.',
+            video: {
+              src: "/video/CM_takeout_issue.mp4",
+              label:
+                "Screen recording: tapping Takeout on one location opens a page listing all three locations' contact info",
+            },
+          },
+          {
+            name: "Kanata's map link points to the wrong Casa",
+            body: "An issue that was impacting the restaurant on real time was peopple calling a branch to order takeout and then driving to a different one to pick up the order. Upon auditing the site I realized that the directions link for the Kanata location is broken: instead of Kanata, Google Maps opens the Preston location.",
+            video: {
+              src: "/video/CM_kanata_map.mp4",
+              label:
+                "Screen recording: tapping the Kanata location's map link opens the Preston location in Google Maps",
+            },
+          },
+          {
+            name: "Alignment and spacing",
+            body: "Menu items are centre-aligned and the three columns start at different heights, so dish names, prices and descriptions never line up. Scanning for a dish or comparing prices takes more effort than it should.",
+            images: [
+              {
+                src: "/img/CM_issue_alignment.jpg",
+                alt: "Original appetizers section with centre-aligned items and columns starting at different heights",
+              },
+            ],
+          },
+          {
+            name: "No call to action",
+            body: "The home page hero is a slogan over a photo, with no button to see the menu, order or call. Visitors have to work out the next step themselves.",
+            images: [
+              {
+                src: "/img/CM_issue_hero.jpg",
+                alt: "Original home page hero with a slogan and no call-to-action button",
+              },
+            ],
+          },
+          {
+            name: "A footer that wastes space",
+            body: '"Follow Us On Social Media" takes up a full quarter of the footer width, wrapping over four lines, for what amounts to two social icons. Meanwhile, the information people actually need, like each location\'s hours, gets squeezed into the remaining columns.',
+            images: [
+              {
+                src: "/img/CM_issue_footer.jpg",
+                alt: "Original footer where Follow Us On Social Media fills a quarter of the width for two icons",
+              },
+            ],
+          },
+        ],
       },
       {
-        heading: "A Look at the Original Site",
-        body: "The original site leads with a full-screen photo and a slogan, and the locations section asks visitors to choose a branch before they can see a menu. Hours, phone numbers and ordering options sit deeper in each page.\n\nThe content was all there, but it was arranged around the brand instead of around the tasks people came to complete.",
+        heading: "Information Architecture",
+        body: 'The audit kept pointing to one root cause: the site never remembers which Casa you chose. So I restructured it around the branch. The main nav is down to five pages (Home, Menu, Locations, Reservations and Our Story), and the branch you pick is carried across all of them.\n\nYou can set your branch from the home page hero, from any card on Locations, or with the switch on the menu page. From then on, the menu, today\'s hours, the call button and directions all use that branch, so "Takeout" or "Get directions" always point to the place you meant.',
         images: [
-          { src: "/img/CM_original_home.jpg", alt: "Original Casa Mexico home page with a full-screen photo hero" },
-          { src: "/img/CM_original_locations.jpg", alt: "Original Casa Mexico locations section with three photo cards" },
+          {
+            src: "/img/CM_sitemap.png",
+            alt: "Sitemap of the redesigned Casa Mexico site: five main pages, with the sections that set or read your selected branch highlighted",
+          },
         ],
       },
       {
         heading: "Low-Fidelity Testing",
-        body: "I tested low-fidelity wireframes before moving to visual design. The feedback was direct:\n\n• Choosing a branch up front took so long that one participant said they wanted to leave the site.\n• An \"All locations\" button made people think there were more than three Casas.\n• The delivery options were too far down the page, so participants had to scroll to find them.\n• The call button on the menu page was too far down too.\n\nEvery one of these pointed to the same fix: stop making people work before they get value, and put the actions they came for at the top.",
+        body: 'I tested low-fidelity wireframes I created with the help of Figma Make before moving to visual design. The feedback was direct:\n\n• Choosing a branch up front took so long that one participant said they wanted to leave the site.\n• An "All locations" button made people think there were more than three Casas.\n• The delivery options were too far down the page, so participants had to scroll to find them.\n• The call button on the menu page was too far down too.\n\nEvery one of these pointed to the same fix: stop making people work before they get value, and put the actions they came for at the top.',
+        imageRows: [
+          [
+            {
+              src: "/img/CM_lofi_home.png",
+              alt: "Low-fidelity home page wireframe with a Choose your Casa panel in the hero, See menu and Call to order buttons, and branch cards",
+            },
+          ],
+          [
+            {
+              src: "/img/CM_lofi_menu_top.png",
+              alt: "Low-fidelity Menu at Merivale wireframe: location switch, menu section tabs, dietary filters and a Taco Tuesday banner",
+            },
+            {
+              src: "/img/CM_lofi_menu_bottom.png",
+              alt: "Low-fidelity menu wireframe, lower half: taco list, an Order from Merivale panel with delivery links, and a footer listing each Casa's phone number",
+            },
+          ],
+        ],
       },
       {
         heading: "The Redesign",
@@ -39,23 +131,42 @@ export const projects = [
           {
             name: "Choose your Casa, once",
             body: "Instead of blocking the page, a location picker on the home page shows all three Casas with today's hours at a glance. The choice is remembered on every page, so the menu, prices, hours and call button always follow your Casa. Taco Tuesday moved into a slim banner at the top, where it no longer competes with the menu.",
-            images: [{ src: "/img/CM_home.png", alt: "Redesigned home page with the Choose your Casa picker" }],
+            images: [
+              {
+                src: "/img/CM_home.png",
+                alt: "Redesigned home page with the Choose your Casa picker",
+              },
+            ],
           },
           {
             name: "A menu built for ordering",
             body: "The menu opens with today's hours and three ways to order: call for pickup, Uber Eats or SkipTheDishes. Dishes are grouped into tabs, tagged as Vegan, Vegetarian or Spicy, and a dietary filter narrows the list in one tap. This answers the frustration I heard most often in interviews.",
-            images: [{ src: "/img/CM_menu.png", alt: "Redesigned menu page with order buttons, category tabs and a dietary filter" }],
+            images: [
+              {
+                src: "/img/CM_menu.png",
+                alt: "Redesigned menu page with order buttons, category tabs and a dietary filter",
+              },
+            ],
           },
           {
             name: "Locations and hours",
             body: "Each Casa gets a card with its address, whether it's open today, its full weekly hours and a phone number to order pickup or book a table. Reservations happen by phone, so the site now says that clearly instead of leaving people to guess.",
-            images: [{ src: "/img/CM_locations.png", alt: "Redesigned locations page with hours and phone numbers for each Casa" }],
+            images: [
+              {
+                src: "/img/CM_locations.png",
+                alt: "Redesigned locations page with hours and phone numbers for each Casa",
+              },
+            ],
           },
         ],
       },
+      {
+        heading: "Usability Testing",
+        body: "Once the new site was built, I tested it with users, asking them to complete the same everyday tasks the original site made hard: find the menu for a specific Casa, check today's hours, and call or order takeout from the right location.\n\nParticipants found the new site easier to navigate. Choosing a Casa once and having the menu, hours and call button follow them meant they no longer had to hunt for their location again or second-guess which branch they were looking at. The order options sitting at the top of the menu got them to the action they came for without scrolling.\n\nThey also found it more visually appealing than the original. The calmer, consistent backgrounds, readable contrast and aligned menu made the site feel more polished and trustworthy, and easier to scan for a dish or a price.",
+      },
     ],
     conclusion:
-      "This project reminded me how much a site's structure decides its usability. Most of the original content was fine; it was simply in the wrong order for the people using it. Talking to diners and testing early made the priorities obvious: menu, hours and ordering come first.\n\nNext, I'd run usability tests on the final design with the same tasks, such as finding today's hours or a vegetarian dish, to measure how much faster they've become. I'd also explore online reservations, since a phone call is currently the only way to book a table.",
+      "This project reminded me how much a site's structure decides its usability. Most of the original content was fine; it was simply in the wrong order for the people using it. Talking to diners and testing early made the priorities obvious: menu, hours and ordering come first.",
   },
   {
     id: "algonquingo",
@@ -131,7 +242,10 @@ export const projects = [
           {
             body: "2. To make the wayfinder screen more engaging, we added an Amenitites list with some of the most pupular places in campus, and a Saved places feature so users can have quick access to their most frequented places",
             images: [
-              { src: "/img/Wayfinder_b&a.png", alt: "wayfinder before and after" },
+              {
+                src: "/img/Wayfinder_b&a.png",
+                alt: "wayfinder before and after",
+              },
               // { src: "/img/wayfinderpre2.png", alt: "wayfinder version 1" },
               // { src: "/img/wayfinderafter1.png", alt: "wayfinder version 2" },
               // { src: "/img/wayfinderafter2.png", alt: "wayfinder version 2" },
@@ -181,7 +295,10 @@ export const projects = [
             name: "Dashboard / Communications",
             body: "On Dashboard is where the user can monitor general statistics about the app such as the number of incidents reported and active users. \n\n Communications is where the emergency alerts (fire alarms, evacuation, weather alerts, etc) are sent",
             images: [
-              { src: "/img/Dashboard_comms.png", alt: "Dashboard and communications screens" },
+              {
+                src: "/img/Dashboard_comms.png",
+                alt: "Dashboard and communications screens",
+              },
               // { src: "/img/communications1.png", alt: "Communications page" },
               // { src: "/img/communications2.png", alt: "Communications page" },
               // { src: "/img/communications3.png", alt: "Communications page" },
@@ -191,7 +308,10 @@ export const projects = [
             name: "Reports / Navigation",
             body: "On the reports tab, the admin can monitor and manage the reports submitted through the Algonquin GO app, the report details show the information the primary user entered on the app. The admin can check these details and mark the report as resolved, the app will show this update. \n\n On the Navigation tab, the user can manage the college's rooms information, in case there is room number changes, it can easily be updated to keep the information up to date on the app.",
             images: [
-              { src: "/img/Reports_navigation.png", alt: "Reports and navigation page" },
+              {
+                src: "/img/Reports_navigation.png",
+                alt: "Reports and navigation page",
+              },
               // { src: "/img/reportsadmin2.png", alt: "Reports page" },
               // { src: "/img/emergency.png", alt: "Emergency page" },
             ],
@@ -201,9 +321,9 @@ export const projects = [
             body: "FInally, the Events feature was a request from the client to have a higher user retention, on that tab the admin can create different kinds of  security-related events such as workshops or scavenger hunts",
             images: [
               { src: "/img/Admin_events.png", alt: "Navigation page" },
-            //   { src: "/img/eventsadmin1.png", alt: "Events page admin" },
-            //   { src: "/img/eventsadmin2.png", alt: "Events page admin" },
-            //   { src: "/img/eventsadmin3.png", alt: "Events page admin" },
+              //   { src: "/img/eventsadmin1.png", alt: "Events page admin" },
+              //   { src: "/img/eventsadmin2.png", alt: "Events page admin" },
+              //   { src: "/img/eventsadmin3.png", alt: "Events page admin" },
             ],
           },
         ],
@@ -263,7 +383,10 @@ export const projects = [
             name: "Tutors / Dashboard",
             body: "Tutors is the main screen on the student's version, here students can browse for tutors, see their details and use the Smart Match feature, which is AI powered and allows them to input their personal schedule, the subject they need a tutor for and any additional details to find the perfect match for them in seconds. This solves the primary user's problem statement. \n\n For tutors, the main screen is Dashboard, here is where they see information that is relevant to them like their earnings, number of students, upcoming sessions and session requests; additionally, they have quick access to creating a new course.",
             images: [
-              { src: "/img/Tutors_dashboard.png", alt: "Tutors and dashboard screens" },
+              {
+                src: "/img/Tutors_dashboard.png",
+                alt: "Tutors and dashboard screens",
+              },
               // { src: "/img/smartmatch.png", alt: "Smart Match feature" },
               // { src: "/img/tutordeets.png", alt: "Tutor details screen" },
               // { src: "/img/tutordashboard.png", alt: "Tutor dashboard" },

@@ -432,3 +432,15 @@
 .case__banner-icon {
   font-size: 1rem;
 }
+
+/* Screen recordings inside case study subsections */
+.case__video {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 80vh;
+  margin: 2rem auto;
+  border-radius: var(--radius, 12px);
+  border: 1px solid var(--clr-border);
+  background: #000;
+}

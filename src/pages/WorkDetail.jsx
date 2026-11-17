@@ -116,6 +116,18 @@ function CaseBody({ project }) {
             </div>
           )}
 
+          {sec.imageRows &&
+            sec.imageRows.map((row, r) => (
+              <div
+                key={r}
+                className={`case__img-row${row.length > 1 ? " case__img-row--2" : ""}`}
+              >
+                {row.map((img, idx) => (
+                  <img key={idx} src={img.src} alt={img.alt} />
+                ))}
+              </div>
+            ))}
+
           {/* Sub-sections (e.g. Wayfinder / Reports / Events) */}
           {sec.subSections &&
             sec.subSections.map((sub) => (
@@ -128,6 +140,18 @@ function CaseBody({ project }) {
                       <img key={idx} src={img.src} alt={img.alt} />
                     ))}
                   </div>
+                )}
+                {sub.video && (
+                  <video
+                    className="case__video"
+                    src={sub.video.src}
+                    aria-label={sub.video.label}
+                    controls
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                  />
                 )}
               </div>
             ))}
