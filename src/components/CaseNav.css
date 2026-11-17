@@ -11,6 +11,10 @@
 }
 
 .case-nav__bar {
+  /* Hug the pills; only stretch (and scroll) when they don't fit */
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 0.35rem;
   border-radius: 999px;
 
